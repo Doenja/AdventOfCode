@@ -9,7 +9,7 @@ public class Test01
 
     public Test01()
     {
-        Assembly.Load("AOC"); // Use actual project name containing your solutions
+        Assembly.Load("AOC");
         _solutions = new AdventSolutions();
     }
 
@@ -17,8 +17,8 @@ public class Test01
     public void Part01()
     {
         var day = _solutions.GetDay(2024, 1);
-        day.SetTestInput("");
-        Assert.Equal("0", day.Part1Answer);
+        day.SetTestInput("3   4\r\n4   3\r\n2   5\r\n1   3\r\n3   9\r\n3   3");
+        Assert.Equal("11", day.Part1Answer);
     }
 
     [Fact]
