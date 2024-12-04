@@ -6,7 +6,8 @@ internal class Program
     private static void Main(string[] args)
     {
         var solutions = new AdventSolutions();
-        var today = solutions.GetMostRecentDay();
+        //var today = solutions.GetMostRecentDay();
+        var today = new Day03();
         Console.WriteLine(today.ToString());
 
         PrintDivider();

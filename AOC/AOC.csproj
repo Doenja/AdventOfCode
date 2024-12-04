@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="2024\Inputs\01.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AdventOfCodeSupport" Version="2.4.3" />
   </ItemGroup>
 
