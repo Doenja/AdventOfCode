@@ -24,7 +24,7 @@ public class Test04
     [Fact]
     public void Part02()
     {
-        _day.SetTestInput("");
-        Assert.Equal("", _day.Part2Answer);
+        _day.SetTestInput(".M.S......\r\n..A..MSMS.\r\n.M.S.MAA..\r\n..A.ASMSM.\r\n.M.S.M....\r\n..........\r\nS.S.S.S.S.\r\n.A.A.A.A..\r\nM.M.M.M.M.\r\n..........");
+        Assert.Equal("9", _day.Part2Answer);
     }
 }

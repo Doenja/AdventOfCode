@@ -50,7 +50,20 @@ namespace AOC._2024
         protected override object InternalPart2()
         {
             int answer = 0;
-            int length = Input.Lines.Length;
+            Grid grid = new Grid(Input.Lines);
+
+            foreach (Point point in grid) 
+            {
+                if (grid.GetValue(point) != 'A') continue;
+
+                string diagonal1 = $"{grid.GetValue(point.Add(Direction.LeftTop))}A{grid.GetValue(point.Add(Direction.RightBot))}";
+                string diagonal2 = $"{grid.GetValue(point.Add(Direction.BotLeft))}A{grid.GetValue(point.Add(Direction.TopRight))}";
+
+                if ((diagonal1 == "MAS" || diagonal1 == "SAM") && (diagonal2 == "MAS" || diagonal2 == "SAM"))
+                {
+                    answer++;
+                }
+            }
 
             return answer;
         }
