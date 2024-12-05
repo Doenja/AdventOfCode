@@ -12,18 +12,19 @@ public class Test04
         Assembly.Load("AOC");
         _solutions = new AdventSolutions();
         _day = _solutions.GetDay(2024, 4);
-        _day.SetTestInput("");
     }
 
     [Fact]
     public void Part01()
     {
-        Assert.Equal("", _day.Part1Answer);
+        _day.SetTestInput("MMMSXXMASM\r\nMSAMXMSMSA\r\nAMXSXMAAMM\r\nMSAMASMSMX\r\nXMASAMXAMM\r\nXXAMMXXAMA\r\nSMSMSASXSS\r\nSAXAMASAAA\r\nMAMMMXMMMM\r\nMXMXAXMASX");
+        Assert.Equal("18", _day.Part1Answer);
     }
 
     [Fact]
     public void Part02()
     {
+        _day.SetTestInput("");
         Assert.Equal("", _day.Part2Answer);
     }
 }
