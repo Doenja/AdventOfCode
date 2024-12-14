@@ -59,7 +59,7 @@ namespace AOC._2024
                 }
 
             }
-
+            grid.Print();
 
             return answer;
         }

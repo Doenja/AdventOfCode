@@ -33,27 +33,23 @@ namespace AOC.Utils
                 lineNr++;
             }
         }
-
-        public char? GetValue(Point point)
-        {
-            if (point.x < 0 || point.y < 0 || point.x > Width || point.y > Height) return null;
-            return _grid[point.x, point.y];
-        }
-
-        public void SetValue(Point point, char value)
-        {
-            _grid[point.x, point.y] = value;
-        }
-
         public bool PointExists(Point point)
         {
             return point.x >= 0 && point.y >= 0 && point.x < Width && point.y < Height;
 
         }
-
-        public Point GetNeighbour(Point point, Point direction)
+        public char? GetValue(Point point)
         {
-            return point.Add(direction);
+            if (!PointExists(point)) return null;
+            return _grid[point.x, point.y];
+        }
+
+        public void SetValue(Point point, char value)
+        {
+            if(PointExists(point))
+            {
+                _grid[point.x, point.y] = value;
+            }
         }
 
         public bool CheckNeighbourValue(Point point, Point direction, char value)
@@ -83,6 +79,19 @@ namespace AOC.Utils
                 }
             }
             return new Point(0,0);
+        }
+
+        public void Print ()
+        {
+            for (int y = 0; y < Width; y++)
+            {
+                StringBuilder line = new StringBuilder();
+                for (int x = 0; x < Height; x++)
+                {
+                    line.Append(GetValue(new Point(x, y)));
+                }
+                Console.WriteLine(line.ToString());
+            }
         }
     }
 }
