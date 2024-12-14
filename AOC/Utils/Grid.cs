@@ -36,8 +36,19 @@ namespace AOC.Utils
 
         public char? GetValue(Point point)
         {
-            if (point.x < 0 || point.y < 0 || point.x >= Width || point.y >= Height) return null;
+            if (point.x < 0 || point.y < 0 || point.x > Width || point.y > Height) return null;
             return _grid[point.x, point.y];
+        }
+
+        public void SetValue(Point point, char value)
+        {
+            _grid[point.x, point.y] = value;
+        }
+
+        public bool PointExists(Point point)
+        {
+            return point.x >= 0 && point.y >= 0 && point.x < Width && point.y < Height;
+
         }
 
         public Point GetNeighbour(Point point, Point direction)
@@ -60,6 +71,18 @@ namespace AOC.Utils
                 }
             }
 
+        }
+
+        internal Point FirstOrDefault(Func<Point, bool> check)
+        {
+            foreach (Point c in this)
+            { 
+                if (check(c))
+                {
+                    return c;
+                }
+            }
+            return new Point(0,0);
         }
     }
 }

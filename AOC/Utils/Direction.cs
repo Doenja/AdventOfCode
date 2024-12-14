@@ -18,6 +18,23 @@ namespace AOC.Utils
         public static Point LeftTop = new Point(-1, -1);
 
         public static Point[] All = { Top, TopRight, Right, RightBot, Bot, BotLeft, Left, LeftTop };
-   
+
+
+        public static Point TurnRight(Point direction)
+        {
+            if (direction == Direction.Top) return Right;
+            else if (direction == Direction.Right) return Bot;
+            else if (direction == Direction.Bot) return Left;
+            return Top;
+        }
+
+        public static Point InverseDirection(Point direction)
+        {
+            if (direction == Direction.Top) return Bot;
+            else if (direction == Direction.Right) return Left;
+            else if (direction == Direction.Bot) return Top;
+            return Right;
+        }
+
     }
 }
