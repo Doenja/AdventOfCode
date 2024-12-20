@@ -21,4 +21,11 @@ public class Test06
         Assert.Equal("41", _day.Part1Answer);
     }
 
+    [Fact]
+    public void Part02()
+    {
+        _day.SetTestInput("....#.....\r\n.........#\r\n..........\r\n..#.......\r\n.......#..\r\n..........\r\n.#..^.....\r\n........#.\r\n#.........\r\n......#...");
+        Assert.Equal("6", _day.Part2Answer);
+    }
+
 }

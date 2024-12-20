@@ -1,5 +1,6 @@
 ﻿using AdventOfCodeSupport;
 using AOC.Utils;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
@@ -12,27 +13,10 @@ namespace AOC._2024
             int answer = 0;
 
             Grid grid = new Grid(Input.Lines);
+            Point guard = getGuard(grid);
 
-            Point guard = grid.FirstOrDefault(p => grid.GetValue(p) == '^' || grid.GetValue(p) == '>' || grid.GetValue(p) == '<' || grid.GetValue(p) == 'v');
-            Point direction;
-            switch (grid.GetValue(guard))
-            {
-                case '^':
-                    direction = Direction.Top; 
-                    break;
-                case '>':
-                    direction = Direction.Right;
-                    break;
-                case '<':
-                    direction = Direction.Left;
-                    break;
-                default:
-                    direction = Direction.Bot;
-                    break;
-            }
-
-            // While the guard does not encounter #, step in direction
             Point stepper = new Point(guard.x, guard.y);
+            Point direction = getGuardDirection(grid, guard);
 
             while (true)
             {
@@ -43,23 +27,21 @@ namespace AOC._2024
                     break;
                 }
 
-                if(grid.GetValue(nextStep) == '#')
+                if (grid.GetValue(nextStep) == '#')
                 {
                     direction = Direction.TurnRight(direction);
-                   
-                } else if (grid.GetValue(nextStep) == 'X')
+                    continue;
+                }
+                else if (grid.GetValue(nextStep) == 'X')
                 {
                     stepper = nextStep;
-  
-                } else
-                {
-                    answer++;
-                    stepper = nextStep;
-                    grid.SetValue(nextStep, 'X');
+                    continue;
                 }
 
+                answer++;
+                stepper = nextStep;
+                grid.SetValue(nextStep, 'X');
             }
-            grid.Print();
 
             return answer;
         }
@@ -68,9 +50,73 @@ namespace AOC._2024
         {
             int answer = 0;
 
-          
+            Grid grid = new Grid(Input.Lines);
+            Point guard = getGuard(grid);
+
+
+            foreach(Point point in grid)
+            {
+                if (grid.GetValue(point) != '.') continue;
+
+                var checkGrid = new Grid(Input.Lines);
+                checkGrid.SetValue(point, '#');
+
+                var unique = new HashSet<string>();
+
+                Point stepper = new Point(guard.x, guard.y);
+                Point direction = getGuardDirection(checkGrid, guard);
+
+                while (true)
+                {
+                    var nextStep = stepper.Add(direction);
+
+                    if (unique.Contains($"{nextStep.x}-{nextStep.y}-{direction}"))
+                    {
+                        answer++;
+                        break;
+                    }
+
+                    if (!checkGrid.PointExists(nextStep))
+                    {
+                        break;
+                    }
+
+                    if (checkGrid.GetValue(nextStep) == '#')
+                    {
+                        direction = Direction.TurnRight(direction);
+                        continue;
+                    }
+
+                    unique.Add($"{nextStep.x}-{nextStep.y}-{direction}");
+                    stepper = nextStep;
+
+                }
+                
+
+            }
+
             return answer;
         }
 
+        private Point getGuard(Grid grid)
+        {
+            return grid.FirstOrDefault(p => grid.GetValue(p) == '^' || grid.GetValue(p) == '>' || grid.GetValue(p) == '<' || grid.GetValue(p) == 'v');
+        }
+
+        private Point getGuardDirection(Grid grid, Point guard)
+        {
+
+            switch (grid.GetValue(guard))
+            {
+                case '^':
+                    return Direction.Top;
+                case '>':
+                    return Direction.Right;
+                case '<':
+                    return Direction.Left;
+                default:
+                    return Direction.Bot;
+            }
+        }
     }
 }
