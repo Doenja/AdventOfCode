@@ -1,5 +1,4 @@
-﻿using AOC._2024;
-using AdventOfCodeSupport;
+﻿using AdventOfCodeSupport;
 
 internal class Program
 {

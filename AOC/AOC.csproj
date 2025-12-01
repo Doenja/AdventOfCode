@@ -11,4 +11,8 @@
     <PackageReference Include="AdventOfCodeSupport" Version="2.4.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="2025\Inputs\" />
+  </ItemGroup>
+
 </Project>
