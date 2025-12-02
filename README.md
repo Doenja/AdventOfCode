@@ -1,1 +1,3 @@
-# Advent of Code in .Net
+# Advent of Code 🦌🛷🎅
+
+https://adventofcode.com/
