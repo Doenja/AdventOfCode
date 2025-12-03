@@ -27,7 +27,7 @@ public class Test03
     {
         var day = _solutions.GetDay(2025, 3);
         day.SetTestInput("987654321111111\r\n811111111111119\r\n234234234234278\r\n818181911112111\r\n");
-        Assert.Equal("", day.Part2Answer);
+        Assert.Equal("3121910778619", day.Part2Answer);
     }
 
   
