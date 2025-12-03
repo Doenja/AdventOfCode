@@ -12,29 +12,26 @@ namespace AOC._2025
             foreach(var line in Input.Lines)
             {
                 int firstNr = 0;
-                int startingIndex = 0;
                 int secondNr = 0;
+
+                int nrIndex = 0;
         
 
                 for (int i = 0; i < line.Length; i++)
                 {
                     var nr = int.Parse(line[i].ToString());
-                    if(i == line.Length -1)
-                    {
-                        secondNr = nr;
-                        break;
-                    }
-
                     if (nr > firstNr)
                     {
                         firstNr = nr;
-                        startingIndex =  i;
+                        nrIndex = i;
                     }
                 }
 
+                int startingIndex = nrIndex == line.Length - 1 ? 0 : nrIndex + 1;
+
                 for (int i = startingIndex; i < line.Length; i++)
                 {
-                    if(i == startingIndex)
+                    if(i == nrIndex)
                     {
                         continue;
                     }
@@ -45,7 +42,7 @@ namespace AOC._2025
                     }
                 }
 
-                answer += firstNr * 10 + secondNr;
+                answer += startingIndex == 0 ? secondNr * 10 + firstNr : firstNr * 10 + secondNr;
 
             }
             
