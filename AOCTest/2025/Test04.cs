@@ -17,7 +17,7 @@ public class Test04
     [Fact]
     public void Part01()
     {
-        var day = _solutions.GetDay(2025, 3);
+        var day = _solutions.GetDay(2025, 4);
         day.SetTestInput("..@@.@@@@.\r\n@@@.@.@.@@\r\n@@@@@.@.@@\r\n@.@@@@..@.\r\n@@.@@@@.@@\r\n.@@@@@@@.@\r\n.@.@.@.@@@\r\n@.@@@.@@@@\r\n.@@@@@@@@.\r\n@.@.@@@.@.");
         Assert.Equal("13", day.Part1Answer);
     }
@@ -25,7 +25,7 @@ public class Test04
     [Fact]
     public void Part02()
     {
-        var day = _solutions.GetDay(2025, 3);
+        var day = _solutions.GetDay(2025, 4);
         day.SetTestInput("..@@.@@@@.\r\n@@@.@.@.@@\r\n@@@@@.@.@@\r\n@.@@@@..@.\r\n@@.@@@@.@@\r\n.@@@@@@@.@\r\n.@.@.@.@@@\r\n@.@@@.@@@@\r\n.@@@@@@@@.\r\n@.@.@@@.@.");
         Assert.Equal("", day.Part2Answer);
     }

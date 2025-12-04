@@ -1,4 +1,6 @@
 ﻿using AdventOfCodeSupport;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsWPF;
 using System.Numerics;
 
 namespace AOC._2025
@@ -8,24 +10,44 @@ namespace AOC._2025
         protected override object InternalPart1()
         {
             int answer = 0;
-            var adjacents = new Dictionary<(int, int), List<(int, int)>>();
+            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>();
+            var lines = Input.Lines;
 
-            for (int i = 0; i < Input.Lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
-                for (int j = 0; j < Input.Lines[i].Length; j++)
+                for (int j = 0; j < lines[i].Length; j++)
                 {
-                    if(Input.Lines[i][j] == '.')
+                    // Only look at the rolls of paper
+                    if(lines[i][j] == '.')
                     {
                         continue;
                     }
 
-                    var id = (x: i, y: j);   
+                    var id = (x: j, y: i);   
                     if (!adjacents.ContainsKey(id))
                     {
                         adjacents[id] = new List<(int, int)>();
                     }
-                    AddAdjacents(id, Input.Lines[i].Length - 1, Input.Lines.Length - 1, adjacents[id]);
+                    FillAdjacentList(id, adjacents[id], (lines[i].Length - 1, lines.Length - 1));
 
+
+                    int counter = 0;
+                    foreach (var adjacent in adjacents[id])
+                    {
+                        if (counter == 4)
+                        {
+                            break;
+                        }
+                        if (lines[adjacent.y][adjacent.x] == '@')
+                        {
+                            counter++;
+                        }
+                    }
+                    if(counter < 4)
+                    {
+                        answer++;
+                    }
+              
                 }
             }
 
@@ -43,17 +65,22 @@ namespace AOC._2025
             return answer;
         }
 
-        public void AddAdjacents((int x, int y) id, int maxX, int maxY, List<(int, int)> adjacentList)
+        public void FillAdjacentList((int x, int y) id, List<(int, int)> adjacentList, (int x, int y) gridSize)
         {
-            int startX = id.x == 0 ? 0 : id.x - 1;
-            int endX = id.x == maxX ? maxX : id.x + 1;
-            int startY = id.y == 0 ? 0 : id.y - 1;
-            int endY = id.y == maxY ? maxY : id.y + 1;
 
-            for (int i = startX; i < endX; i++)
+            for (int i = id.x -1; i < id.x + 2; i++)
             {
-                for (int j = startY; j < endY; j++)
+                if(i < 0 || i > gridSize.x)
                 {
+                    continue;
+                }
+
+                for (int j = id.y - 1; j < id.y + 2; j++)
+                {
+                    if ((i == id.x && j == id.y) || j < 0 || j > gridSize.y)
+                    {
+                        continue;
+                    }
                     adjacentList.Add((i, j));
                 }
             }
