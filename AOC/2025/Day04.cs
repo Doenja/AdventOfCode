@@ -1,7 +1,4 @@
 ﻿using AdventOfCodeSupport;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsWPF;
-using System.Numerics;
 
 namespace AOC._2025
 {
@@ -10,21 +7,27 @@ namespace AOC._2025
         protected override object InternalPart1()
         {
             int answer = 0;
-            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>();
             var lines = Input.Lines;
+
+            // Paper roll coordiates with their adjacent coordinates
+            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>(); 
 
             for (int i = 0; i < lines.Length; i++)
             {
                 for (int j = 0; j < lines[i].Length; j++)
                 {
-                    if(lines[i][j] == '.')
+                    // Skip empty spaces
+                    if (lines[i][j] == '.')
                     {
                         continue;
                     }
 
-                    int adjacentRolls = 0;
+                    // Fill adjacents
                     var id = (x: j, y: i);   
                     adjacents[id] = GetAdjacents(j, i, lines[0].Length, lines.Length).ToList();
+
+                    // Count every roll with less than 4 adjacent rolls
+                    int adjacentRolls = 0;
 
                     foreach (var (x, y) in adjacents[id])
                     {
@@ -50,23 +53,27 @@ namespace AOC._2025
         protected override object InternalPart2()
         {
             int answer = 0;
-            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>();
             var lines = Input.Lines;
 
-            // Make a dictionary of all roll coordinates and their adjacent coordinates
+            // Paper roll coordiates with their adjacent coordinates
+            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>();
+
             for (int i = 0; i < lines.Length; i++)
             {
                 for (int j = 0; j < lines[i].Length; j++)
                 {
+                    // Skip empty spaces
                     if (lines[i][j] == '.')
                     {
                         continue;
                     }
 
+                    // Fill adjacents
                     var id = (x: j, y: i);
                     adjacents[id] = GetAdjacents(j, i, lines[0].Length, lines.Length).ToList();
                 }
             }
+
 
             var canRemoveRolls = true;
 
@@ -92,12 +99,13 @@ namespace AOC._2025
                     }
                 }
 
-                if(rollsToRemove.Count > 0)
+                if (rollsToRemove.Count > 0)
                 {
                     answer += rollsToRemove.Count;
                     rollsToRemove.ForEach(id => adjacents.Remove(id));
 
-                } else
+                } 
+                else
                 {
                     canRemoveRolls = false;
                 }
