@@ -17,37 +17,30 @@ namespace AOC._2025
             {
                 for (int j = 0; j < lines[i].Length; j++)
                 {
-                    // Only look at the rolls of paper
                     if(lines[i][j] == '.')
                     {
                         continue;
                     }
 
+                    int adjacentRolls = 0;
                     var id = (x: j, y: i);   
-                    if (!adjacents.ContainsKey(id))
-                    {
-                        adjacents[id] = new List<(int, int)>();
-                    }
-                    FillAdjacentList(id, adjacents[id], (lines[i].Length - 1, lines.Length - 1));
+                    adjacents[id] = GetAdjacents(j, i, lines[0].Length, lines.Length).ToList();
 
-
-                    int counter = 0;
-                    foreach (var adjacent in adjacents[id])
+                    foreach (var (x, y) in adjacents[id])
                     {
-                        if (counter == 4)
+                        if (adjacentRolls == 4)
                         {
                             break;
                         }
-                        if (lines[adjacent.y][adjacent.x] == '@')
+                        if (lines[y][x] == '@')
                         {
-                            counter++;
+                            adjacentRolls++;
                         }
                     }
-                    if(counter < 4)
+                    if (adjacentRolls < 4)
                     {
                         answer++;
                     }
-              
                 }
             }
 
@@ -56,35 +49,84 @@ namespace AOC._2025
 
         protected override object InternalPart2()
         {
-            long answer = 0;
+            int answer = 0;
+            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>();
+            var lines = Input.Lines;
 
-            foreach(var line in Input.Lines)
+            // Make a dictionary of all roll coordinates and their adjacent coordinates
+            for (int i = 0; i < lines.Length; i++)
             {
-           
-            }
-            return answer;
-        }
-
-        public void FillAdjacentList((int x, int y) id, List<(int, int)> adjacentList, (int x, int y) gridSize)
-        {
-
-            for (int i = id.x -1; i < id.x + 2; i++)
-            {
-                if(i < 0 || i > gridSize.x)
+                for (int j = 0; j < lines[i].Length; j++)
                 {
-                    continue;
-                }
-
-                for (int j = id.y - 1; j < id.y + 2; j++)
-                {
-                    if ((i == id.x && j == id.y) || j < 0 || j > gridSize.y)
+                    if (lines[i][j] == '.')
                     {
                         continue;
                     }
-                    adjacentList.Add((i, j));
+
+                    var id = (x: j, y: i);
+                    adjacents[id] = GetAdjacents(j, i, lines[0].Length, lines.Length).ToList();
+                }
+            }
+
+            var canRemoveRolls = true;
+
+            while (canRemoveRolls)
+            {
+                var rollsToRemove = new List<(int x, int y)>();
+
+                foreach ((int x, int y) id in adjacents.Keys)
+                {
+                    int adjacentRolls = 0;
+
+                    foreach ((int x, int y) adjacentId in adjacents[id])
+                    {
+                        if (lines[adjacentId.y][adjacentId.x] == '@' && adjacents.ContainsKey(adjacentId))
+                        {
+                            adjacentRolls++;
+                        }
+                    }
+
+                    if (adjacentRolls < 4)
+                    {
+                        rollsToRemove.Add(id);
+                    }
+                }
+
+                if(rollsToRemove.Count > 0)
+                {
+                    answer += rollsToRemove.Count;
+                    rollsToRemove.ForEach(id => adjacents.Remove(id));
+
+                } else
+                {
+                    canRemoveRolls = false;
+                }
+            }
+
+            return answer;
+        }
+
+        public IEnumerable<(int x, int y)> GetAdjacents(int x, int y, int width, int height)
+        {
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                for (int dy = -1; dy <= 1; dy++)
+                {
+                    if (dx == 0 && dy == 0)
+                    {
+                        continue; // Skip self
+                    }
+
+                    int newX = x + dx;
+                    int newY = y + dy;
+
+                    if (newX >= 0 && newX < width && newY >= 0 && newY < height)
+                    {
+                        yield return (newX, newY);
+                    }
                 }
             }
         }
-
+           
     }
 }

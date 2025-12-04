@@ -27,7 +27,7 @@ public class Test04
     {
         var day = _solutions.GetDay(2025, 4);
         day.SetTestInput("..@@.@@@@.\r\n@@@.@.@.@@\r\n@@@@@.@.@@\r\n@.@@@@..@.\r\n@@.@@@@.@@\r\n.@@@@@@@.@\r\n.@.@.@.@@@\r\n@.@@@.@@@@\r\n.@@@@@@@@.\r\n@.@.@@@.@.");
-        Assert.Equal("", day.Part2Answer);
+        Assert.Equal("43", day.Part2Answer);
     }
 
   
