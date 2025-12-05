@@ -57,15 +57,49 @@ namespace AOC._2025
 
                 }
             }
+
             return answer;
         }
 
         protected override object InternalPart2()
         {
-            int answer = 0;
-            var lines = Input.Lines;
+            long answer = 0;
 
-          
+            var ranges = new List<(long start, long end)>();
+
+            foreach (var line in Input.Lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    break;
+                }
+
+                var start = long.Parse(line.Split('-')[0]);
+                var end = long.Parse(line.Split('-')[1]);
+
+                var rangesToRemove = new List<(long start, long end)>();
+                foreach (var range in ranges)
+                {
+                    if (RangesOverlap(start, end, range.start, range.end))
+                    {
+                        start = Math.Min(start, range.start);
+                        end = Math.Max(end, range.end);
+                        rangesToRemove.Add(range);
+                    }
+                }
+
+                ranges.Add((start, end));
+
+                foreach (var range in rangesToRemove)
+                {
+                    ranges.Remove(range);
+                }
+            }
+
+            foreach(var range in ranges)
+            {
+                answer += range.end - range.start + 1;
+            }
 
             return answer;
         }
