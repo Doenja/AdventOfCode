@@ -45,10 +45,51 @@ namespace AOC._2025
         {
             long answer = 0;
 
-            foreach (var line in Input.Lines)
+            var width = Input.Lines[0].Length;
+            var height = Input.Lines.Length;
+            var stringCols = new Dictionary<int, List<string>>();
+
+            for (int i = 0; i < height; i++)
             {
+                for (int j = width - 1; j >= 0; j--)
+                {
+                    var ch = Input.Lines[i][j];
+
+                    if(int.TryParse(ch.ToString(), out int nr))
+                    {
+                        if(!stringCols.ContainsKey(j))
+                        {
+                            stringCols[j] = new List<string>();
+                        }
+                        stringCols[j].Add(ch.ToString());
+                    }                 
+                }
             }
 
+            var numbers = new List<int>();
+
+            for (int j = width - 1; j >= 0; j--)
+            {
+                if (stringCols.ContainsKey(j))
+                {
+                    var currentNumber = int.Parse(string.Join("", stringCols[j]));
+                    numbers.Add(currentNumber);
+                }
+
+                char bottomChar = Input.Lines[height - 1][j];
+                if (bottomChar == '+')
+                {
+                    answer += AddAllNumbers(numbers);
+                    numbers.Clear();
+                    continue;
+                }
+                if (bottomChar == '*')
+                {
+                    answer += MultiplyAllNumbers(numbers);
+                    numbers.Clear();
+                    continue;
+                }
+            }
             return answer;
         }
 
@@ -62,7 +103,5 @@ namespace AOC._2025
         {
             return numbers.Aggregate(0L, (acc, val) => acc + val);
         }
-
-
     }
 }
