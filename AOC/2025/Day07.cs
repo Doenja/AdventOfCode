@@ -1,5 +1,4 @@
 ﻿using AdventOfCodeSupport;
-using System.Text.RegularExpressions;
 
 namespace AOC._2025
 {
@@ -34,44 +33,48 @@ namespace AOC._2025
 
         protected override object InternalPart2()
         {
-            int answer = 0;
+            long answer = 0;
 
             var width = Input.Lines[0].Length;
             var height = Input.Lines.Length;
 
-            var previousRow = new int[width];
-            var currentRow = new int[width];
+            var previousRow = new long[width];
+            var nextRow = new long[width];
 
-            for (int i = 0; i < height; i++)
+            // Find the start in the first line
+            for (int i = 0; i < width; i++)
+            {
+                char ch = Input.Lines[0][i];
+                if (ch == 'S')
+                {
+                    previousRow[i] = 1;
+                    break;
+                }
+            }
+
+            for (int i = 1; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
                     char ch = Input.Lines[i][j];
-                    if (ch == 'S')
+                    long valueAbove = previousRow[j];
+                    if (valueAbove == 0) continue;
+                    
+                    if(ch == '^')
                     {
-                        currentRow[j] = 1; // Start point
-                        continue;
+                        if (j > 0) nextRow[j - 1] += valueAbove;
+                        if (j < width - 1) nextRow[j + 1] += valueAbove;
                     }
-
-                    int countsAboveMe = i > 0 ? previousRow[j] : 0;
-
-                    if (countsAboveMe == 0) continue;
-                 
-                    if (ch == '^')
+                    else if (ch == '.')
                     {
-                        if (j > 0) currentRow[j - 1] += countsAboveMe;
-                        if (j < width - 1) currentRow[j + 1] += countsAboveMe;
-                    } 
-                    else
-                    {
-                        currentRow[j] = previousRow[j];
+                        nextRow[j] += valueAbove;
                     }
                 }
-                previousRow = currentRow;
-                currentRow = new int[width];
+                Array.Copy(nextRow, previousRow, width);
+                Array.Clear(nextRow, 0, width);
             }
 
-            foreach(var count in currentRow)
+            foreach(var count in previousRow)
             {
                 answer += count;
             }
