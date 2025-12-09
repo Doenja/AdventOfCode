@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using AdventOfCodeSupport;
+﻿using AdventOfCodeSupport;
+using System.Reflection;
 
 namespace AOC._2025;
-using static AOC._2025.Day08;
 
 public class Test08
 {
@@ -34,7 +33,7 @@ public class Test08
     public void EuclideanDistance()
     {
         var day08 = new Day08();
-        var result = day08.EuclideanDistance(new Point3D(1,2,3), new Point3D(4,6,8));
+        var result = day08.EuclideanDistance(new Point3D(1, 2, 3), new Point3D(4, 6, 8));
         Assert.Equal(7.07, result, precision: 3);
     }
 

@@ -12,15 +12,15 @@ namespace AOC._2024
             var grid = new Grid(Input.Lines);
             string word = "XMAS";
 
-            foreach (Point point in grid) 
+            foreach (Point point in grid)
             {
                 // Skip all points where the value is not X
                 if (grid.GetValue(point) != word[0]) continue;
 
                 // If it is X, check in which direction(s) the M is
                 var possibleDirections = from d in Direction.All
-                                                     where grid.CheckNeighbourValue(point, d, word[1])
-                                                     select d;
+                                         where grid.CheckNeighbourValue(point, d, word[1])
+                                         select d;
 
                 foreach (var pd in possibleDirections)
                 {
@@ -35,11 +35,12 @@ namespace AOC._2024
                         {
                             isValid = false;
                             break;
-                        };
+                        }
+                        ;
                     }
                     if (isValid) answer++;
                 }
-                                    
+
             }
 
             return answer;
@@ -52,7 +53,7 @@ namespace AOC._2024
             int answer = 0;
             Grid grid = new Grid(Input.Lines);
 
-            foreach (Point point in grid) 
+            foreach (Point point in grid)
             {
                 if (grid.GetValue(point) != 'A') continue;
 

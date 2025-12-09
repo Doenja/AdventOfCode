@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using AdventOfCodeSupport;
-using AdventOfCodeSupport.Testing;
-using AOC._2025;
+﻿using AdventOfCodeSupport;
+using System.Reflection;
 
 namespace AOC._2025;
+
 public class Test02
 {
     private readonly AdventSolutions _solutions;
@@ -54,7 +53,7 @@ public class Test02
     [Fact]
     public static void TestGetDivisors()
     {
-        Assert.Equal(new List<int>{ 1, 2, 3, 6 }, Day02.GetDivisors(6));
+        Assert.Equal(new List<int> { 1, 2, 3, 6 }, Day02.GetDivisors(6));
         Assert.Equal(new List<int> { 1, 7 }, Day02.GetDivisors(7));
     }
 }

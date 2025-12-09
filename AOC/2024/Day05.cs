@@ -1,7 +1,4 @@
 ﻿using AdventOfCodeSupport;
-using AOC.Utils;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace AOC._2024
 {
@@ -24,13 +21,13 @@ namespace AOC._2024
             Array.ConstrainedCopy(Input.Lines, i + 1, updates, 0, updates.Length);
 
             // Compare each number to the ones on its left an check for rule violations
-            foreach ( var update in updates )
+            foreach (var update in updates)
             {
                 bool isValid = true;
                 List<string> leftFromNr = new List<string>();
                 foreach (var nr in update.Split(","))
                 {
-                    foreach (var lnr in leftFromNr) 
+                    foreach (var lnr in leftFromNr)
                     {
                         var checkForRule = $"{nr}|{lnr}";
                         if (_rules.Contains(checkForRule))
@@ -39,18 +36,19 @@ namespace AOC._2024
                             break;
                         }
                     }
-                    leftFromNr.Add(nr);  
+                    leftFromNr.Add(nr);
                 }
 
                 // Find all middle numbers from the valid rules and add them
                 if (isValid)
                 {
                     answer += GetMidNr(update.Split(","));
-                } else
+                }
+                else
                 {
                     _invalidUpdates.Add(update);
                 }
-                
+
             }
             return answer;
         }
@@ -71,10 +69,10 @@ namespace AOC._2024
                 });
                 return split;
             }).ToList();
-          
-            foreach ( var line in sorted )
+
+            foreach (var line in sorted)
             {
-               answer += GetMidNr(line.ToArray());
+                answer += GetMidNr(line.ToArray());
             }
             return answer;
         }

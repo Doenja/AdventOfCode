@@ -1,5 +1,4 @@
 ﻿using AdventOfCodeSupport;
-using System.Diagnostics.CodeAnalysis;
 
 namespace AOC._2025
 {
@@ -7,14 +6,7 @@ namespace AOC._2025
     {
         protected override object InternalPart1()
         {
-            var redTiles = new List<Point2D>();
-
-            foreach (var ch in Input.Lines)
-            {
-                var split = ch.Split(',');
-                var point = new Point2D(int.Parse(split[0]), int.Parse(split[1]));
-                redTiles.Add(point);
-            }
+            List<Point2D> redTiles = getRedTiles(Input.Lines);
 
             long largestRectangle = 0;
 
@@ -41,11 +33,47 @@ namespace AOC._2025
 
         protected override object InternalPart2()
         {
-            int answer = 0;
+            List<Point2D> redTiles = getRedTiles(Input.Lines);
 
-            return answer;
+            for (int i = 0; i < redTiles.Count; i++)
+            {
+                if (i == redTiles.Count - 1)
+                {
+                    // Connect the last redTIle to the first
+                    break;
+                }
+
+                var tile = redTiles[i];
+                var nextTile = redTiles[i + 1];
+
+                if (tile.X == nextTile.X)
+                {
+
+                }
+                else if (tile.Y == nextTile.Y)
+                {
+
+                }
+            }
+
+            return 0;
+
         }
 
-       
+        private List<Point2D> getRedTiles(string[] lines)
+        {
+            var redTiles = new List<Point2D>();
+
+            foreach (var ch in lines)
+            {
+                var split = ch.Split(',');
+                var point = new Point2D(int.Parse(split[0]), int.Parse(split[1]));
+                redTiles.Add(point);
+            }
+
+            return redTiles;
+        }
+
+
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using System.Runtime.InteropServices;
-using AdventOfCodeSupport;
+﻿using AdventOfCodeSupport;
 using AOC.Utils;
 
 namespace AOC._2024;
@@ -15,7 +13,7 @@ public class Day08 : AdventBase
         foreach (Point point in grid)
         {
             var ch = grid.GetValue(point);
-            if (ch == null || ch == '.' ) continue;
+            if (ch == null || ch == '.') continue;
 
             if (antennas.ContainsKey((char)ch))
             {

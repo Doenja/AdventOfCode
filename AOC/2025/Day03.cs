@@ -1,5 +1,4 @@
 ﻿using AdventOfCodeSupport;
-using System.Numerics;
 
 namespace AOC._2025
 {
@@ -9,12 +8,12 @@ namespace AOC._2025
         {
             int answer = 0;
 
-            foreach(var line in Input.Lines)
+            foreach (var line in Input.Lines)
             {
                 int firstNr = 0;
                 int nrIndex = 0;
                 int secondNr = 0;
-                        
+
                 for (int i = 0; i < line.Length; i++)
                 {
                     var nr = int.Parse(line[i].ToString());
@@ -29,7 +28,7 @@ namespace AOC._2025
 
                 for (int i = startingIndex; i < line.Length; i++)
                 {
-                    if(i == nrIndex)
+                    if (i == nrIndex)
                     {
                         continue;
                     }
@@ -41,7 +40,7 @@ namespace AOC._2025
                 }
                 answer += startingIndex == 0 ? secondNr * 10 + firstNr : firstNr * 10 + secondNr;
             }
-            
+
             return answer;
         }
 
@@ -49,7 +48,7 @@ namespace AOC._2025
         {
             long answer = 0;
 
-            foreach(var line in Input.Lines)
+            foreach (var line in Input.Lines)
             {
                 Stack<int> numbers = new Stack<int>();
                 int digitsToRemove = line.Length - 12;

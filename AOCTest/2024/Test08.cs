@@ -1,7 +1,8 @@
-﻿using System.Reflection;
-using AdventOfCodeSupport;
+﻿using AdventOfCodeSupport;
+using System.Reflection;
 
 namespace AOC._2024;
+
 public class Test08
 {
     private readonly AdventSolutions _solutions;

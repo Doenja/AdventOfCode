@@ -46,7 +46,8 @@ public class Day01 : AdventBase
             if (occurance.ContainsKey(nr))
             {
                 occurance[nr]++;
-            } else
+            }
+            else
             {
                 occurance[nr] = 1;
             }
@@ -54,12 +55,12 @@ public class Day01 : AdventBase
 
         // For each nr in the leftNrs
         // add its value times its occurance to answer
-        foreach (var nr in leftNrs) 
+        foreach (var nr in leftNrs)
         {
             if (occurance.ContainsKey(nr))
             {
                 answer += nr * occurance[nr];
-            } 
+            }
         }
 
         return answer;

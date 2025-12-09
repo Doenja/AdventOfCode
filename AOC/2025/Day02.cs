@@ -23,7 +23,7 @@ namespace AOC._2025
                 for (int i = startDigits.Length; i < endDigits.Length + 1; i++)
                 {
                     // Only numbers with an even amount of digits can be a sequence repeated twice
-                    if(i % 2 == 0)
+                    if (i % 2 == 0)
                     {
                         // Generate a number with half the amount of digits i
                         var generatedNumberPart = GenerateNumberPart(i / 2);
@@ -35,7 +35,7 @@ namespace AOC._2025
                             {
                                 break;
                             }
-                            if(generated >= startLong)
+                            if (generated >= startLong)
                             {
                                 answer += generated;
                             }
@@ -86,7 +86,7 @@ namespace AOC._2025
                             }
                             if (generated >= startLong)
                             {
-                                uniqueInvalidIds.Add(generated); 
+                                uniqueInvalidIds.Add(generated);
                             }
 
                             generatedNumberPart++;
@@ -100,7 +100,7 @@ namespace AOC._2025
                     answer += invalidId;
                 }
             }
-            
+
             return answer;
         }
 

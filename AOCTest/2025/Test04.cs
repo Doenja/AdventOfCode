@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using AdventOfCodeSupport;
-using AdventOfCodeSupport.Testing;
-using AOC._2025;
+﻿using AdventOfCodeSupport;
+using System.Reflection;
 
 namespace AOC._2025;
+
 public class Test04
 {
     private readonly AdventSolutions _solutions;
@@ -30,5 +29,5 @@ public class Test04
         Assert.Equal("43", day.Part2Answer);
     }
 
-  
+
 }

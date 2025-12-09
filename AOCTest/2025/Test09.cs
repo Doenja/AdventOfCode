@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using AdventOfCodeSupport;
+﻿using AdventOfCodeSupport;
+using System.Reflection;
 
 namespace AOC._2025;
-using static AOC._2025.Day08;
 
 public class Test09
 {
@@ -27,7 +26,7 @@ public class Test09
     {
         var day = _solutions.GetDay(2025, 9);
         day.SetTestInput("7,1\r\n11,1\r\n11,7\r\n9,7\r\n9,5\r\n2,5\r\n2,3\r\n7,3");
-        Assert.Equal("0", day.Part1Answer);
+        Assert.Equal("24", day.Part1Answer);
     }
 
 

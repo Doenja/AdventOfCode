@@ -20,7 +20,7 @@ public class Day07 : AdventBase
                 long next = numbers[i + 1];
                 var newResults = new List<long>();
 
-                foreach(var result in results)
+                foreach (var result in results)
                 {
                     if (result + next <= testValue) newResults.Add(result + next);
                     if (result * next <= testValue) newResults.Add(result * next);
@@ -30,7 +30,7 @@ public class Day07 : AdventBase
                 results = newResults;
             }
 
-            if (results.Contains(testValue)) answer+= testValue;
+            if (results.Contains(testValue)) answer += testValue;
         }
 
         return answer;

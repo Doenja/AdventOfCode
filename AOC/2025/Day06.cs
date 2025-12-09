@@ -29,13 +29,13 @@ namespace AOC._2025
 
                     if (int.TryParse(split[i], out int nr))
                     {
-                        if(!numberCols.ContainsKey(i))
+                        if (!numberCols.ContainsKey(i))
                         {
                             numberCols[i] = new List<int>();
                         }
                         numberCols[i].Add(nr);
                     }
-                } 
+                }
             }
 
             return answer;
@@ -55,14 +55,14 @@ namespace AOC._2025
                 {
                     var ch = Input.Lines[i][j];
 
-                    if(int.TryParse(ch.ToString(), out int nr))
+                    if (int.TryParse(ch.ToString(), out int nr))
                     {
-                        if(!stringCols.ContainsKey(j))
+                        if (!stringCols.ContainsKey(j))
                         {
                             stringCols[j] = new List<string>();
                         }
                         stringCols[j].Add(ch.ToString());
-                    }                 
+                    }
                 }
             }
 

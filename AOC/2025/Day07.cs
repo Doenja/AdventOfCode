@@ -14,7 +14,7 @@ namespace AOC._2025
                 for (int i = 0; i < line.Length; i++)
                 {
                     char ch = line[i];
-                    if(ch == 'S')
+                    if (ch == 'S')
                     {
                         beamIndices.Add(i);
                     }
@@ -26,7 +26,7 @@ namespace AOC._2025
                         if (i < line.Length - 1) beamIndices.Add(i + 1); // It continues to the right
                         answer++; // Count the split
                     }
-                }            
+                }
             }
             return answer;
         }
@@ -59,8 +59,8 @@ namespace AOC._2025
                     char ch = Input.Lines[i][j];
                     long valueAbove = previousRow[j];
                     if (valueAbove == 0) continue;
-                    
-                    if(ch == '^')
+
+                    if (ch == '^')
                     {
                         if (j > 0) nextRow[j - 1] += valueAbove;
                         if (j < width - 1) nextRow[j + 1] += valueAbove;
@@ -74,7 +74,7 @@ namespace AOC._2025
                 Array.Clear(nextRow, 0, width);
             }
 
-            foreach(var count in previousRow)
+            foreach (var count in previousRow)
             {
                 answer += count;
             }

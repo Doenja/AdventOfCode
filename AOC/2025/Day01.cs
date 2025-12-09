@@ -1,5 +1,4 @@
-﻿using System;
-using AdventOfCodeSupport;
+﻿using AdventOfCodeSupport;
 
 namespace AOC._2025
 {
@@ -17,7 +16,7 @@ namespace AOC._2025
 
                 dial = rotation == 'R' ? dial + distance : dial - distance;
 
-                if(dial % 100 == 0)
+                if (dial % 100 == 0)
                 {
                     answer++;
                 }
@@ -40,8 +39,8 @@ namespace AOC._2025
                 answer += CountZeroLandOrPass(dial, newDial);
                 dial = newDial;
             }
-            
-            return answer; 
+
+            return answer;
         }
 
 
@@ -51,7 +50,7 @@ namespace AOC._2025
             if (end > start)
             {
                 // Turning dial to the right
-                int startHundred =  (int)Math.Ceiling(start / 100.0);
+                int startHundred = (int)Math.Ceiling(start / 100.0);
                 int endHundred = (int)Math.Ceiling(end / 100.0);
 
                 counter = endHundred - startHundred;

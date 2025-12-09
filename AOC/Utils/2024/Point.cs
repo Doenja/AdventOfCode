@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace AOC.Utils
+﻿namespace AOC.Utils
 {
     internal class Point
     {

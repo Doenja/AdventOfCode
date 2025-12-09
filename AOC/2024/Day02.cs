@@ -9,13 +9,13 @@ public class Day02 : AdventBase
         int answer = 0;
         int length = Input.Lines.Length;
 
-        foreach (string line in Input.Lines) 
+        foreach (string line in Input.Lines)
         {
             var numbers = line.Split(' ')?.Select(Int32.Parse)?.ToList();
 
-            if(numbers != null)
-            { 
-                if(isListSafe(numbers)) answer++;
+            if (numbers != null)
+            {
+                if (isListSafe(numbers)) answer++;
             }
         }
         return answer;
@@ -35,21 +35,23 @@ public class Day02 : AdventBase
                 if (isListSafe(numbers))
                 {
                     answer++;
-                } else
+                }
+                else
                 {
                     bool isSafe = false;
                     for (int i = 0; i < numbers.Count; i++)
                     {
                         var tempList = new List<int>(numbers);
                         tempList.RemoveAt(i);
-                        if(isListSafe(tempList))
+                        if (isListSafe(tempList))
                         {
                             isSafe = true;
                             break;
                         }
                     }
                     if (isSafe) answer++;
-                };
+                }
+                ;
             }
         }
         return answer;
@@ -58,7 +60,7 @@ public class Day02 : AdventBase
 
     private bool isValidDifference(int n1, int n2)
     {
-        return  n1 != n2 && Math.Abs(n1 - n2) < 4;
+        return n1 != n2 && Math.Abs(n1 - n2) < 4;
     }
 
     private bool isIncreasing(int n1, int n2)

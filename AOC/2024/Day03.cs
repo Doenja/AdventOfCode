@@ -1,6 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using AdventOfCodeSupport;
 using System.Text.RegularExpressions;
-using AdventOfCodeSupport;
 
 
 // 78965138 :(
@@ -21,7 +20,7 @@ namespace AOC._2024
 
             MatchCollection matches = mulRegex.Matches(lines);
 
-            foreach (Match match in matches) 
+            foreach (Match match in matches)
             {
                 answer += matchParseAndMultiply(match.Value);
             }
@@ -39,7 +38,7 @@ namespace AOC._2024
             bool enabled = true;
             foreach (Match match in matches)
             {
-                switch(match.Value)
+                switch (match.Value)
                 {
                     case "do()":
                         enabled = true;

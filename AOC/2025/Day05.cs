@@ -32,7 +32,7 @@ namespace AOC._2025
                             rangesToRemove.Add(range);
                             start = Math.Min(start, range.start);
                             end = Math.Max(end, range.end);
-                        } 
+                        }
                     }
 
                     ranges.Add((start, end));
@@ -96,7 +96,7 @@ namespace AOC._2025
                 }
             }
 
-            foreach(var range in ranges)
+            foreach (var range in ranges)
             {
                 answer += range.end - range.start + 1;
             }
@@ -104,7 +104,7 @@ namespace AOC._2025
             return answer;
         }
 
-      
+
         public static bool RangesOverlap(long start1, long end1, long start2, long end2)
         {
             return start1 <= end2 && start2 <= end1;

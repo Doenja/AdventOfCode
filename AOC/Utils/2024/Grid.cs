@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Numerics;
+﻿using System.Collections;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace AOC.Utils
 {
@@ -46,7 +39,7 @@ namespace AOC.Utils
 
         public void SetValue(Point point, char value)
         {
-            if(PointExists(point))
+            if (PointExists(point))
             {
                 _grid[point.x, point.y] = value;
             }
@@ -72,16 +65,16 @@ namespace AOC.Utils
         internal Point FirstOrDefault(Func<Point, bool> check)
         {
             foreach (Point c in this)
-            { 
+            {
                 if (check(c))
                 {
                     return c;
                 }
             }
-            return new Point(0,0);
+            return new Point(0, 0);
         }
 
-        public void Print ()
+        public void Print()
         {
             for (int y = 0; y < Width; y++)
             {

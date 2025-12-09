@@ -10,7 +10,7 @@ namespace AOC._2025
             var lines = Input.Lines;
 
             // Paper roll coordiates with their adjacent coordinates
-            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>(); 
+            var adjacents = new Dictionary<(int x, int y), List<(int x, int y)>>();
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -23,7 +23,7 @@ namespace AOC._2025
                     }
 
                     // Fill adjacents
-                    var id = (x: j, y: i);   
+                    var id = (x: j, y: i);
                     adjacents[id] = GetAdjacents(j, i, lines[0].Length, lines.Length).ToList();
 
                     // Count every roll with less than 4 adjacent rolls
@@ -104,7 +104,7 @@ namespace AOC._2025
                     answer += rollsToRemove.Count;
                     rollsToRemove.ForEach(id => adjacents.Remove(id));
 
-                } 
+                }
                 else
                 {
                     canRemoveRolls = false;
@@ -135,6 +135,6 @@ namespace AOC._2025
                 }
             }
         }
-           
+
     }
 }

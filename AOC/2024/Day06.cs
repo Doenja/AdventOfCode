@@ -1,8 +1,5 @@
 ﻿using AdventOfCodeSupport;
 using AOC.Utils;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace AOC._2024
 {
@@ -54,7 +51,7 @@ namespace AOC._2024
             Point guard = getGuard(grid);
 
 
-            foreach(Point point in grid)
+            foreach (Point point in grid)
             {
                 if (grid.GetValue(point) != '.') continue;
 
@@ -91,7 +88,7 @@ namespace AOC._2024
                     stepper = nextStep;
 
                 }
-                
+
 
             }
 
