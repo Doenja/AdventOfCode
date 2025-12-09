@@ -1,7 +1,4 @@
 ﻿using AdventOfCodeSupport;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
 
 namespace AOC._2025
 {
@@ -13,11 +10,10 @@ namespace AOC._2025
 
             var points = GetPoints(Input.Lines);
 
-            Dictionary<(Point, Point), double> sortedDistances = GetSortedDistances(points);
+            Dictionary<(Point3D, Point3D), double> sortedDistances = GetSortedDistances(points);
 
-            // Connect the circuits
-            var circuits = new List<HashSet<Point>>();
-            var connect = 1000;
+            var circuits = new List<HashSet<Point3D>>();
+            var connect = 10;
 
             foreach (var distance in sortedDistances)
             {
@@ -31,7 +27,7 @@ namespace AOC._2025
 
                 if (circuitA == null && circuitB == null)
                 {
-                    circuits.Add(new HashSet<Point> { pointA, pointB });
+                    circuits.Add(new HashSet<Point3D> { pointA, pointB });
                 }
                 else if (circuitA != null && circuitB == null)
                 {
@@ -64,9 +60,9 @@ namespace AOC._2025
 
             var points = GetPoints(Input.Lines);
 
-            Dictionary<(Point, Point), double> sortedDistances = GetSortedDistances(points);
+            Dictionary<(Point3D, Point3D), double> sortedDistances = GetSortedDistances(points);
 
-            var circuits = new List<HashSet<Point>>();
+            var circuits = new List<HashSet<Point3D>>();
 
             foreach (var distance in sortedDistances)
             {
@@ -78,7 +74,7 @@ namespace AOC._2025
 
                 if (circuitA == null && circuitB == null)
                 {
-                    circuits.Add(new HashSet<Point> { pointA, pointB });
+                    circuits.Add(new HashSet<Point3D> { pointA, pointB });
                 }
                 else if (circuitA != null && circuitB == null)
                 {
@@ -105,47 +101,23 @@ namespace AOC._2025
             return answer;
         }
 
-        public struct Point
+        private List<Point3D> GetPoints(string[] lines)
         {
-            public int X;
-            public int Y;
-            public int Z;
-            public Point(int x, int y, int z)
-            {
-                X = x;
-                Y = y;
-                Z = z;
-            }
-            public override bool Equals([NotNullWhen(true)] object? obj)
-            {
-                return obj is Point p && p.X == X && p.Y == Y && p.Z == Z;
-            }
-            public static bool operator ==(Point a, Point b) => a.Equals(b);
-            public static bool operator !=(Point a, Point b) => !a.Equals(b);
-            public override int GetHashCode()
-            {
-                return HashCode.Combine(X, Y, Z);
-            }
-            public override string ToString() => $"({X}, {Y}, {Z})";
-        }
-
-        private List<Point> GetPoints(string[] lines)
-        {
-            var points = new List<Point>();
+            var points = new List<Point3D>();
             foreach (var line in lines)
             {
                 var split = line.Split(',');
                 int x = int.Parse(split[0]);
                 int y = int.Parse(split[1]);
                 int z = int.Parse(split[2]);
-                points.Add(new Point(x, y, z));
+                points.Add(new Point3D(x, y, z));
             }
             return points;
         }
 
-        private Dictionary<(Point, Point), double> GetSortedDistances(List<Point> points)
+        private Dictionary<(Point3D, Point3D), double> GetSortedDistances(List<Point3D> points)
         {
-            var distances = new Dictionary<(Point, Point), double>();
+            var distances = new Dictionary<(Point3D, Point3D), double>();
 
             foreach (var pointA in points)
             {
@@ -167,7 +139,7 @@ namespace AOC._2025
             return distances;
         }
 
-        public double EuclideanDistance(Point a, Point b)
+        public double EuclideanDistance(Point3D a, Point3D b)
         {
             double distance = (double)Math.Sqrt(Math.Pow(b.X - a.X, 2) + Math.Pow(b.Y - a.Y, 2) + Math.Pow(b.Z - a.Z, 2));
             return Math.Round(distance, 2);

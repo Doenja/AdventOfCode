@@ -34,7 +34,7 @@ public class Test08
     public void EuclideanDistance()
     {
         var day08 = new Day08();
-        var result = day08.EuclideanDistance(new Point(1,2,3), new Point(4,6,8));
+        var result = day08.EuclideanDistance(new Point3D(1,2,3), new Point3D(4,6,8));
         Assert.Equal(7.07, result, precision: 3);
     }
 
